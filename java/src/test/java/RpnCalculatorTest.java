@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class RpnCalculatorTest {
@@ -12,29 +13,40 @@ public class RpnCalculatorTest {
     }
 
     @Test
-    public void onePlusOne_makes2(){
-        String expression = "1 1 +";
-        assertEquals(2, calc.calculate(expression));
+    public void anEmptyStringIsZero() {
+        assertEquals(0, calc.calculate(""));
     }
-//    @Test
-//    public void oneMinusOne_makes0(){
-//	    RpnCalculator calc = new RpnCalculator();
-//	    String expression = "1 1 -";
-//	    assertEquals(0, calc.calculate(expression));
-//    }
-//    @Test
-//    public void twoTimesThree_makes6(){
-//        String expression = "2 3 *";
-//        assertEquals(6, calc.calculate(expression));
-//    }
-//    @Test
-//    public void tenDividedByFive_makes2(){
-//	    String expression ="10 5 /";
-//	    assertEquals(2, calc.calculate(expression));
-//    }
-//    @Test
-//    public void fourPlusTwoMinusThree_makes3() {
-//        String expression = "4 2 + 3 -";
-//        assertEquals(3, calc.calculate(expression));
-//    }
+
+    @Test
+    public void theNumberFiveReturnsFive(){
+        assertEquals(5, calc.calculate("5"));
+    }
+
+    @Test
+    public void theNumberSevenReturnsSeven(){
+        assertEquals(7, calc.calculate("7"));
+    }
+
+    @Test
+    public void twoNumberExpressionWithAdditionOperationReturnsTheSum() {
+        assertEquals(2, calc.calculate("1 1 +"));
+    }
+
+@Test
+    public void expressionWithinAnotherExpressionReturnsResultOfBothExpressions() {
+        assertEquals(9, calc.calculate("4 2 + 3 +"));
+    }
+
+    @Test
+    public void multipleDigitExpressionsAreCalculated() {
+        assertEquals(39, calc.calculate("14 12 + 13 +"));
+    }
+    @Test
+    @Ignore
+    public void foo() {
+        assertEquals(7, calc.calculate("1 1 2 + + 3 +"));
+    }
+
+
+
 }

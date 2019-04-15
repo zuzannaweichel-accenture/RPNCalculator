@@ -1,56 +1,34 @@
 import java.util.Arrays;
 import java.util.List;
 
+
+
 public class RpnCalculator {
 
     public int calculate(String expression) {
-        List<Character> operators = Arrays.asList('+', '-','/', '*');
-       String[] expressionArr = expression.split(" ");
-        while(expressionArr.length > 2){
-            String[] chunks = chunkify(expression,operators);
-            int calculatedBase = calculateBase(chunks[1]);
-
-            StringBuilder dechunk = new StringBuilder();
-            String reducedExpression = dechunk.append(chunks[0]+" ").append(calculatedBase+" ").append(chunks[2]+" ").toString();
-            expressionArr = reducedExpression.split(" ");
+        String[] elements = expression.split(" ");
+        String operator = "+";
+        if (expression.equals("")) {
+            return 0;
+        } else if (elements.length == 1) {
+            return Integer.parseInt(expression);
+        } else if (expression.chars().filter(i -> i == operator.charAt(0)).count() > 1) {
+            int index = expression.indexOf(operator);
+            String expression1 = expression.substring(0, index); //
+            String expression2 = expression.substring(index+1, expression.length() - 2); //
+            int calculate = calculate(expression1);
+            int calculate1 = calculate(expression2);
+            return add(calculate, calculate1);
+        } else {
+            String expression1 = elements[0];
+            String expression2 = elements[1];
+            return calculate(expression1) + calculate(expression2);
         }
-
-        return Integer.parseInt(expressionArr[0]);
     }
 
-    private Integer calculateBase(String chunk) {
-        String[] elem = chunk.split(" ");
-        int e1 = Integer.parseInt(elem[0]);
-        int e2 = Integer.parseInt(elem[1]);
-        String op = elem[2];
-        if (op.equals("+")) {
-            return e1 + e2;
-        }
-        if (op.equals("-")) {
-            return e1 - e2;
-        }
-        if (op.equals("*")) {
-            return e1 * e2;
-        }
-        if (op.equals("/")) {
-            return e1 / e2;
-        }
-        return null;
+    private int add(int first, int second) {
+        return first + second;
     }
-
-    private String[] chunkify(String expression, List<Character> operators){
-        int index = 0;
-        for (int i = 0; i <expression.length() ; i++) {
-            if (operators.contains(expression.charAt(i))){
-                index = i;
-            }
-        }
-        String prechunk = expression.substring(0, index-4);
-        String chunk = expression.substring(index-4, index+1);
-        String postchunk = expression.substring(index+2);
-
-        return new String[] {prechunk, chunk, postchunk};
-    }
-
 }
-
+//"1 1 2 + + 3 +"
+//"14 12 + 13 +"
