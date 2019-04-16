@@ -5,11 +5,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class RpnCalculatorTest {
-	private RpnCalculator calc;
+	//private RpnCalculator calc;
+    private RPNCalc calc;
 
 	@Before
     public void setup(){
-	    calc = new RpnCalculator();
+	    //calc = new RpnCalculator();
+        calc = new RPNCalc();
     }
 
     @Test
