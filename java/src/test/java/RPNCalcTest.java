@@ -55,10 +55,11 @@ public class RPNCalcTest {
         assertEquals("3", calc.calculate("4 2 + 3 -"));
     }
 
-//    @Test
-//    public void multipleDigitExpressionsAreCalculated() {
-//        assertEquals("39", calc.calculate("14 12 + 13 +"));
-//    }
+    @Test
+    public void multipleDigitExpressionsAreCalculated() {
+        assertEquals("39", calc.calculate("14 12 + 13 +"));
+    }
+
     @Test
     public void foo() {
         assertEquals("7", calc.calculate("1 1 2 + + 3 +"));
